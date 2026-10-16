@@ -1,0 +1,91 @@
+<%@ Page Language="VB" AutoEventWireup="false" CodeBehind="Registro.aspx.vb" Inherits="TechFix_Registro.Registro" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>TechFix - Recepción y Registro de Equipos</title>
+    <!-- CSS de Bootstrap para un diseño limpio y adaptable -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body { background-color: #f4f6f9; }
+        .card-custom { max-width: 650px; margin: 40px auto; border-radius: 12px; border: none; }
+        .header-bg { background-color: #1a252f; color: white; border-top-left-radius: 12px; border-top-right-radius: 12px; }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="container">
+            <div class="card card-custom shadow">
+                <div class="card-header header-bg text-center py-3">
+                    <h3 class="mb-0">🛠️ TechFix - Mantenimiento & Reparación</h3>
+                    <small>Registro de Clientes y Equipos</small>
+                </div>
+                <div class="card-body p-4">
+
+                    <!-- Mensajes de estado -->
+                    <asp:Label ID="lblMensaje" runat="server" CssClass="alert d-block" Visible="false"></asp:Label>
+
+                    <!-- SECCIÓN: DATOS DEL CLIENTE -->
+                    <h5 class="text-primary mb-3">1. Datos del Cliente</h5>
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Nombre Completo:</label>
+                            <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" Required="true" Placeholder="Ej. Juan Pérez"></asp:TextBox>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Teléfono / WhatsApp:</label>
+                            <asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control" Required="true" Placeholder="Ej. 70000000"></asp:TextBox>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Correo Electrónico:</label>
+                        <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TextMode="Email" Placeholder="cliente@email.com"></asp:TextBox>
+                    </div>
+
+                    <hr />
+
+                    <!-- SECCIÓN: DATOS DEL EQUIPO -->
+                    <h5 class="text-primary mb-3">2. Información del Dispositivo</h5>
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Tipo de Dispositivo:</label>
+                            <asp:DropDownList ID="ddlTipoEquipo" runat="server" CssClass="form-select">
+                                <asp:ListItem Text="-- Seleccionar --" Value="" />
+                                <asp:ListItem Text="Computadora de Escritorio (PC)" Value="PC" />
+                                <asp:ListItem Text="Laptop / Portátil" Value="Laptop" />
+                                <asp:ListItem Text="Teléfono Móvil" Value="Celular" />
+                                <asp:ListItem Text="Tablet" Value="Tablet" />
+                            </asp:DropDownList>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Marca y Modelo:</label>
+                            <asp:TextBox ID="txtMarcaModelo" runat="server" CssClass="form-control" Required="true" Placeholder="Ej. HP Pavilion / Samsung S21"></asp:TextBox>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Tipo de Servicio Solicitado:</label>
+                        <asp:RadioButtonList ID="rblTipoServicio" runat="server" RepeatDirection="Horizontal" CssClass="form-check">
+                            <asp:ListItem Text=" Mantenimiento (Preventivo / Limpieza) &nbsp;&nbsp;" Value="Mantenimiento" Selected="True" />
+                            <asp:ListItem Text=" Reparación (Falla / Daño)" Value="Reparacion" />
+                        </asp:RadioButtonList>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Descripción del Problema o Detalle:</label>
+                        <asp:TextBox ID="txtDescripcion" runat="server" TextMode="MultiLine" Rows="3" CssClass="form-control" Placeholder="Escriba los síntomas o el trabajo a realizar..."></asp:TextBox>
+                    </div>
+
+                    <!-- BOTÓN DE ENVIAR -->
+                    <div class="d-grid mt-4">
+                        <asp:Button ID="btnRegistrar" runat="server" Text="Registrar Solicitud" CssClass="btn btn-primary btn-lg" OnClick="btnRegistrar_Click" />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
